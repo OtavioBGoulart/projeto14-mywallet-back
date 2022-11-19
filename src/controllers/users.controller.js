@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt"
 import { v4 as uuidV4 } from "uuid";
-import { usersCollection, sessionsCollection } from "../database/db.js";
+import { usersCollection, sessionsCollection, balanceCollection } from "../database/db.js";
 
 
 export async function singUp(req, res) {
@@ -9,6 +9,8 @@ export async function singUp(req, res) {
     try {
         const hashPassword = bcrypt.hashSync(user.password, 11);
         await usersCollection.insertOne({...user, password: hashPassword});
+        const userId = await usersCollection.findOne({ email: user.email });
+        await balanceCollection.insertOne({userId, balance: 0});
         res.sendStatus(201);
     } catch(error) {
         console.log(error);

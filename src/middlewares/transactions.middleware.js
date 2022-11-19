@@ -2,7 +2,7 @@ import { transCollection, balanceCollection } from "../database/db.js";
 import transactionsSchema from "../schemas/transactionsSchema.js";
 
 
-export async function transactionsValidation (req, res, next) {
+export function transactionsValidation (req, res, next) {
     const user = req.user;
     const {type, value} = req.body;
 
@@ -19,6 +19,7 @@ export async function transactionsValidation (req, res, next) {
         }
     
     req.user = user;
+    req.transaction = stransactionsData;
 
     next();
     
