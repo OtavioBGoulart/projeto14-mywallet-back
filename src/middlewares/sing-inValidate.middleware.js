@@ -20,7 +20,7 @@ export async function singinValidation (req, res, next) {
         res.sendStatus(500);
     }
 
-    req.userSingin = userExists;
+    req.singinData = userExists;
 
     next();
 }
