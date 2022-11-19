@@ -29,12 +29,13 @@ export async function singupValidation(req, res, next) {
             return res.status(422).send(errors);
         }
 
+        req.singupData = singupData;
 
     } catch {
         return res.sendStatus(500);
     }
 
-    req.singupData = singupData;
+    
 
     next();
 }

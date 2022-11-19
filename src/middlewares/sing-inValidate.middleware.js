@@ -12,15 +12,18 @@ export async function singinValidation (req, res, next) {
          } 
 
          const passwordOk = bcrypt.compareSync(password, userExists.password);
-         if (!password) {
+         if (!passwordOk) {
             return res.sendStatus(401);
          }
+
+         req.singinData = userExists;
+
     } catch (error) {
         console.log(error);
         res.sendStatus(500);
     }
 
-    req.singinData = userExists;
+    
 
     next();
 }

@@ -5,7 +5,7 @@ import { usersCollection, sessionsCollection } from "../database/db.js";
 
 export async function singUp(req, res) {
     const user = req.body;
-    delete user.body.confirmedPass
+    //delete user.body.confirmedPass
 
     try {
         const hashPassword = bcrypt.hashSync(user.password, 11);
