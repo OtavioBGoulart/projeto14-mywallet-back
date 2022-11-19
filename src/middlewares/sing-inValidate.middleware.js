@@ -1,6 +1,6 @@
-import singinSchema from "../schemas/sing-inSchema";
+import singinSchema from "../schemas/sing-inSchema.js";
 import bcrypt from "bcrypt";
-import { usersCollection } from "../database/db";
+import { usersCollection } from "../database/db.js";
 
 export async function singinValidation (req, res, next) {
     const {email, password} = req.body;

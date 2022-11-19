@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { singIn, singUp } from "../controllers/users.controller";
-import { singinValidation } from "../middlewares/sing-inValidate.middleware";
-import { singupValidation } from "../middlewares/singupSchema.midleware";
+import { singIn, singUp } from "../controllers/users.controller.js";
+import { singinValidation } from "../middlewares/sing-inValidate.middleware.js";
+import { singupValidation } from "../middlewares/singupSchema.midleware.js";
 
 const router = Router();
 

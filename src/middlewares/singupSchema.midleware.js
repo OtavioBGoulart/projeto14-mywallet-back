@@ -1,5 +1,5 @@
-import { usersCollection } from "../database/db";
-import singupSchema from "../schemas/sing-upSchema";
+import { usersCollection } from "../database/db.js";
+import singupSchema from "../schemas/sing-upSchema.js";
 
 export async function singupValidation(req, res, next) {
     const { name, email, password, confirmedPass } = req.body;

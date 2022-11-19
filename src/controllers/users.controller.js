@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt"
-import { func } from "joi";
 import { v4 as uuidV4 } from "uuid";
-import { usersCollection, sessionsCollection } from "../database/db";
+import { usersCollection, sessionsCollection } from "../database/db.js";
 
 
 export async function singUp(req, res) {
@@ -18,7 +17,7 @@ export async function singUp(req, res) {
     }
 }
 
-export async function singIn(res, res) {
+export async function singIn(req, res) {
     const { email } = req.body;
     const token = uuidV4();
 
