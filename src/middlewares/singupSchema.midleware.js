@@ -4,6 +4,10 @@ import singupSchema from "../schemas/sing-upSchema";
 export async function singupValidation(req, res, next) {
     const { name, email, password, confirmedPass } = req.body;
 
+    if (password !== confirmedPass) {
+        return res.status(409).send({ message: "As duas senhas devems ser iguais"})
+    }
+
     try {
         const userExists = await usersCollection.findOne({ email });
 
