@@ -29,6 +29,7 @@ export async function singupValidation(req, res, next) {
             return res.status(422).send(errors);
         }
 
+        delete singupData.confirmedPass;
         req.singupData = singupData;
 
     } catch {

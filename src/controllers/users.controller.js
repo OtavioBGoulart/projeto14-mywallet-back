@@ -4,8 +4,7 @@ import { usersCollection, sessionsCollection } from "../database/db.js";
 
 
 export async function singUp(req, res) {
-    const user = req.body;
-    //delete user.body.confirmedPass
+    const user = req.singupData;
 
     try {
         const hashPassword = bcrypt.hashSync(user.password, 11);
@@ -19,6 +18,7 @@ export async function singUp(req, res) {
 
 export async function singIn(req, res) {
     const { email } = req.body;
+    console.log(req.singinData);
     const token = uuidV4();
 
     try {
