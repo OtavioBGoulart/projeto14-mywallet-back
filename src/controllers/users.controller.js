@@ -10,7 +10,7 @@ export async function singUp(req, res) {
         const hashPassword = bcrypt.hashSync(user.password, 11);
         await usersCollection.insertOne({...user, password: hashPassword});
         const userId = await usersCollection.findOne({ email: user.email });
-        await balanceCollection.insertOne({userId, balance: 0});
+        await balanceCollection.insertOne({userId: userId._id, balance: 0});
         res.sendStatus(201);
     } catch(error) {
         console.log(error);

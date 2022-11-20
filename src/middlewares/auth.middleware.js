@@ -2,16 +2,18 @@ import { usersCollection, sessionsCollection } from "../database/db.js";
 
 export async function authValidation (req, res, next) {
     const { authorization } = req.headers;
-    const token = authorization?.replace("Bearer", "");
+    const token = authorization?.replace("Bearer ", "");
 
     if (!token) {
         return res.sendStatus(401);
 
     }
 
+
     try {
 
         const session = await sessionsCollection.findOne( { token });
+        console.log(session)
         const user = await usersCollection.findOne( { _id: session?.userId });
 
         if (!user) {

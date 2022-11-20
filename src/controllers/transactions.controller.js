@@ -7,9 +7,10 @@ export async function inputTransaction (req, res) {
     const userTransactions = req.userTransactions;
 
     try {
-    const moneyInput = await transCollection.insertOne( userTransactions );
-    const updateBalance = await balanceCollection.updateOne( {userId: userTransactions.userId}, 
-        { $set:  {balance: (balance + userTransactions.value)}});
+    await transCollection.insertOne( userTransactions );
+    const { balance } = await balanceCollection.findOne({userId: userTransactions.userId});
+    await balanceCollection.updateOne( {userId: userTransactions.userId}, 
+        { $set:  {balance: (balance + Number(userTransactions.value))}});
     res.sendStatus(201);
 
     } catch (error) {

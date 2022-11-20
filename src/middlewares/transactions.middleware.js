@@ -3,7 +3,7 @@ import transactionsSchema from "../schemas/transactionsSchema.js";
 
 
 export function transactionsValidation (req, res, next) {
-    const user = req.user;
+    const userId = req.user._id;
     const {type, value} = req.body;
 
     const transactionsData = {
@@ -18,8 +18,13 @@ export function transactionsValidation (req, res, next) {
             return res.status(422).send(errors);
         }
     
-    req.user = user;
-    req.transaction = stransactionsData;
+    const userTransactions = {
+        userId,
+        type,
+        value
+    }
+
+    req.userTransactions = userTransactions;
 
     next();
     
