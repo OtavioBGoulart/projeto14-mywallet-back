@@ -1,8 +1,7 @@
-import { transCollection, balanceCollection } from "../database/db.js";
-import transactionsSchema from "../schemas/transactionsSchema.js";
+import outputSchema from "../schemas/outputSchema.js";
 
 
-export function transactionsValidation (req, res, next) {
+export function outputValidation (req, res, next) {
     const userId = req.user._id;
     const {type, value} = req.body;
 
@@ -11,7 +10,7 @@ export function transactionsValidation (req, res, next) {
         value
     }
 
-    const { error } = transactionsSchema.validate(transactionsData, { abortEarly: false });
+    const { error } = outputSchema.validate(transactionsData, { abortEarly: false });
 
         if (error) {
             const errors = error.details.map((detail) => detail.message);
