@@ -37,3 +37,25 @@ export async function outputTransaction (req, res) {
     }
 
 }
+
+export async function getHistory (req, res) {
+    const  userId  = req.user._id;
+    console.log(req.user)
+
+    try {
+
+        const transactions = await transCollection.find({ userId }).toArray();
+        const { balance } = await balanceCollection.findOne( { userId });
+
+        const history = {
+            transactions,
+            balance
+        }
+
+        res.send(history);
+
+    } catch (error) {
+        console.log(error);
+        return res.sendStatus(500);
+    }
+}
