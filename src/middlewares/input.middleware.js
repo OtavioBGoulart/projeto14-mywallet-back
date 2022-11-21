@@ -19,14 +19,14 @@ export function inputValidation(req, res, next) {
         return res.status(422).send(errors);
     }
 
-    const time = dayjs().format("DD/MM");
+    const day = dayjs().format("DD/MM");
 
     const userTransactions = {
         userId,
         type,
         value,
         description,
-        time
+        day
     }
 
     req.userTransactions = userTransactions;
