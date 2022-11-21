@@ -25,6 +25,7 @@ export async function singIn(req, res) {
 
     try {
         const userExists = await usersCollection.findOne({ email });
+        const userName = userExists.name;
         await sessionsCollection.insertOne(
             {
                 token,
@@ -32,7 +33,7 @@ export async function singIn(req, res) {
             }
         )
 
-        res.send({ token });
+        res.send({ token, userName });
     } catch (error) {
         console.log(error);
         res.sendStatus(500);

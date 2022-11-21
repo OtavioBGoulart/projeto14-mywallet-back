@@ -1,30 +1,36 @@
 import inputSchema from "../schemas/inputSchema.js";
+import dayjs from "dayjs";
 
 
-export function inputValidation (req, res, next) {
+export function inputValidation(req, res, next) {
     const userId = req.user._id;
-    const {type, value} = req.body;
+    const { type, value, description } = req.body;
 
     const transactionsData = {
         type,
-        value
+        value,
+        description
     }
 
     const { error } = inputSchema.validate(transactionsData, { abortEarly: false });
 
-        if (error) {
-            const errors = error.details.map((detail) => detail.message);
-            return res.status(422).send(errors);
-        }
-    
+    if (error) {
+        const errors = error.details.map((detail) => detail.message);
+        return res.status(422).send(errors);
+    }
+
+    const time = dayjs().format("DD/MM");
+
     const userTransactions = {
         userId,
         type,
-        value
+        value,
+        description,
+        time
     }
 
     req.userTransactions = userTransactions;
 
     next();
-    
+
 }

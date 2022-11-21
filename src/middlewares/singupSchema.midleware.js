@@ -5,7 +5,7 @@ export async function singupValidation(req, res, next) {
     const { name, email, password, confirmedPass } = req.body;
 
     if (password !== confirmedPass) {
-        return res.status(409).send({ message: "As duas senhas devems ser iguais" })
+        return res.status(409).send({ message: "As duas senhas devem ser iguais" })
     }
 
     try {
@@ -26,7 +26,7 @@ export async function singupValidation(req, res, next) {
 
         if (error) {
             const errors = error.details.map((detail) => detail.message);
-            return res.status(422).send(errors);
+            return res.status(422).send( {message: errors });
         }
 
         delete singupData.confirmedPass;
